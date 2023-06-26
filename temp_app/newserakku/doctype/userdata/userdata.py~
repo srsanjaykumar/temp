@@ -33,8 +33,7 @@ def user_value(user_id,quest_id,value):
 	if user_id not in alldoc:
 		return "User ID is Not Avaliable ....."
 	all_quest_id=[]
-	allquestion_doctype="ALLQuestions"
-	all_id=frappe.get_list(allquestion_doctype,fields=['uid'])
+	all_id=frappe.get_list("ALLQuestions",fields=['uid'])
 	for ids in all_id:
 		all_quest_id.append(ids['uid'])
 	if quest_id not in all_quest_id:
@@ -117,9 +116,8 @@ def change(quest_id,quest_values,pair):
 		if cat != "Transport":
 			total_sumation=0
 			for j in range(len(quest_id)):
-				allquestion_doctype="ALLQuestions"
-				doc_name=frappe.get_list(allquestion_doctype,filters={'uid':quest_id[j]})
-				docs= frappe.get_doc(allquestion_doctype,doc_name)
+				doc_name=frappe.get_list("ALLQuestions",filters={'uid':quest_id[j]})
+				docs= frappe.get_doc("ALLQuestions",doc_name)
 				category=docs.category
 				if cat == category:
 					
@@ -153,8 +151,8 @@ def change(quest_id,quest_values,pair):
 			val1=0	
 			# iterating two doctypes and get the values 
 			for i in range(len(trans_arr)):
-				doc_name=frappe.get_list(allquestion_doctype,filters={'uid':trans_arr[i]})
-				docs= frappe.get_doc(allquestion_doctype,doc_name)
+				doc_name=frappe.get_list("ALLQuestions",filters={'uid':trans_arr[i]})
+				docs= frappe.get_doc("ALLQuestions",doc_name)
 				for j in range(len(docs.options)):
 					if docs.options[j].proc_name == pair[trans_arr[i]]:
 						if i==0:
@@ -193,7 +191,6 @@ def filt_values(options):
 				break
 	
 	return question_id,question_values
-
 
 
 
